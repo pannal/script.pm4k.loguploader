@@ -1,3 +1,6 @@
+v0.4.0
+- krypton bump
+
 v0.3.3
 - move repo to gitlab
 - use file.size() instead of stat()

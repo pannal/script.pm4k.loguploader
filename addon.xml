@@ -18,5 +18,8 @@
 		<website>http://kodi.tv/</website>
 		<email></email>
 		<source>https://gitlab.com/ronie/script.kodi.loguploader/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
 	</extension>
 </addon>
