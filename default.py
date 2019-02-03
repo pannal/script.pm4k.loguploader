@@ -12,8 +12,8 @@ ADDON = xbmcaddon.Addon()
 ADDONID = ADDON.getAddonInfo('id')
 ADDONNAME = ADDON.getAddonInfo('name')
 ADDONVERSION = ADDON.getAddonInfo('version')
-CWD = ADDON.getAddonInfo('path').decode('utf-8')
-PROFILE = ADDON.getAddonInfo('profile').decode('utf-8')
+CWD = ADDON.getAddonInfo('path')
+PROFILE = ADDON.getAddonInfo('profile')
 LANGUAGE = ADDON.getLocalizedString
 
 socket.setdefaulttimeout(5)
@@ -25,10 +25,8 @@ OLDLOG = os.path.join(LOGPATH, 'kodi.old.log')
 REPLACES = (('//.+?:.+?@', '//USER:PASSWORD@'),('<user>.+?</user>', '<user>USER</user>'),('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),)
 
 def log(txt):
-    if isinstance (txt,str):
-        txt = txt.decode('utf-8')
     message = u'%s: %s' % (ADDONID, txt)
-    xbmc.log(msg=message.encode('utf-8'), level=xbmc.LOGDEBUG)
+    xbmc.log(msg=message, level=xbmc.LOGDEBUG)
 
 
 class QRCode(xbmcgui.WindowXMLDialog):
@@ -170,7 +168,7 @@ class Main:
         self.session = requests.Session()
         UserAgent = '%s: %s' % (ADDONID, ADDONVERSION)
         try:
-            response = self.session.post(URL + 'documents', data=data, headers={'User-Agent': UserAgent})
+            response = self.session.post(URL + 'documents', data=data.encode('utf-8'), headers={'User-Agent': UserAgent})
             if 'key' in response.json():
                 result = URL + response.json()['key']
                 return True, result
