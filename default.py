@@ -100,8 +100,8 @@ class Main:
                 self.showResult('%s[CR]%s' % (error, data))
 
     def getSettings(self):
-        self.oldlog = ADDON.getSetting('oldlog') == 'true'
-        self.crashlog = ADDON.getSetting('crashlog') == 'true'
+        self.oldlog = ADDON.getSettingBool('oldlog')
+        self.crashlog = ADDON.getSettingBool('crashlog')
 
     def getFiles(self):
         logfiles = []
