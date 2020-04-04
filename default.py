@@ -25,7 +25,7 @@ OLDLOG = os.path.join(LOGPATH, 'kodi.old.log')
 REPLACES = (('//.+?:.+?@', '//USER:PASSWORD@'),('<user>.+?</user>', '<user>USER</user>'),('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),)
 
 def log(txt):
-    message = u'%s: %s' % (ADDONID, txt)
+    message = '%s: %s' % (ADDONID, txt)
     xbmc.log(msg=message, level=xbmc.LOGDEBUG)
 
 
