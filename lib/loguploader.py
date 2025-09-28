@@ -25,7 +25,7 @@ OLDLOG = os.path.join(LOGPATH, 'kodi.old.log')
 REPLACES = (('//.+?:.+?@', '//USER:PASSWORD@'),
             ('<user>.+?</user>', '<user>USER</user>'),
             ('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),
-            # mask token
+            # mask token, uuid
             (r'X-Plex-Token=.+?(\b|$)', 'X-Plex-Token=*****'),
             (r'uuid: ([\w]{,6})\w+?([\w]{,6})\b', r'\1*****\2'),
             # mask IPs
