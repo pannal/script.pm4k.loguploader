@@ -22,7 +22,23 @@ URL = 'https://paste.kodi.tv/'
 LOGPATH = xbmcvfs.translatePath('special://logpath')
 LOGFILE = os.path.join(LOGPATH, 'kodi.log')
 OLDLOG = os.path.join(LOGPATH, 'kodi.old.log')
-REPLACES = (('//.+?:.+?@', '//USER:PASSWORD@'),('<user>.+?</user>', '<user>USER</user>'),('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),)
+REPLACES = (('//.+?:.+?@', '//USER:PASSWORD@'),
+            ('<user>.+?</user>', '<user>USER</user>'),
+            ('<pass>.+?</pass>', '<pass>PASSWORD</pass>'),
+            # mask token
+            (r'X-Plex-Token=.+?(\b|$)', 'X-Plex-Token=*****'),
+            (r'uuid: ([\w]{,6})\w+?([\w]{,6})\b', r'\1*****\2'),
+            # mask IPs
+            (r'(?:(\d{1,3}\.\d{1,3})\.\d{1,3}\.\d{1,3})', r'\1.**.**'),
+            # mask plex.direct
+            (r'([\d-]{,6})[\w\-\.]+?(\.plex\.direct)', r'\1*****\2'),
+            # mask server connection URLs
+            (r'(https?://)([\w\.\-]{,6})[\w\.-]*?(\.plex\.direct:\d+|:\d+)', r'\1\2*****\3'),
+            # mask servers
+            (r'((?:PlexServer|connection for|reachability for|Merged) \'\w{,6})\w+\'', r'\1*****'),
+            # mask clientIdentifiers
+            (r'(clientIdentifier:\w{,6})\w+?(\w{,6})\b', r'\1*****\2'),
+)
 
 def log(txt):
     message = '%s: %s' % (ADDONID, txt)
